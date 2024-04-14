@@ -1,0 +1,6 @@
+/.env
+/projectenv
+/activate.bat
+__pycache__
+media/*
+!media
