@@ -20,7 +20,7 @@ class CustomerViewSet(viewsets.ModelViewSet):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
     parser_classes = [JSONParser, MultiPartParser, FormParser]
-    permission_classes = [IsAuthenticated,]
+    # permission_classes = [IsAuthenticated,]
     
     def create(self, request, *args, **kwargs):
         auth_serializer = RegisterSerializer(data=request.data)
