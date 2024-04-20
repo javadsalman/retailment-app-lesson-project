@@ -14,10 +14,10 @@ class RegisterSerializer(serializers.Serializer):
     password = serializers.CharField(source='user.password', write_only=True)
     birth_date = serializers.DateField(input_formats=['%Y-%m-%d'])
     gender = serializers.ChoiceField(choices=GENDER_CHOICES)
-    profile_photo = serializers.ImageField()
+    profile_photo = serializers.ImageField(required=False)
     company_name = serializers.CharField()
-    company_logo = serializers.ImageField()
-    address = serializers.CharField()
+    company_logo = serializers.ImageField(required=False)
+    address = serializers.CharField(required=False)
     token = serializers.SerializerMethodField(read_only=True)
     
     def create(self, validated_data):
