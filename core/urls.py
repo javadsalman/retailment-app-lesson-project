@@ -23,6 +23,8 @@ from os import getenv
 urlpatterns = [
     path(getenv('ADMIN_URL'), admin.site.urls), # type: ignore
     path('customer/', include('customer.api.urls')),
+    path('employee/', include('employee.api.urls')),
+    path('store/', include('store.api.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

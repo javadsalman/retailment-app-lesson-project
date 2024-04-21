@@ -9,7 +9,7 @@ from .serializers import RegisterSerializer, CustomerSerializer, CustomerAuthSer
 from ..models import Customer, Subscription, Payment
 
 class SubscriptionViewSet(viewsets.ModelViewSet):
-    queryset = Subscription.objects.all()
+    queryset = Subscription.objects.filter(deleted=False)
     serializer_class = SubscriptionSerializer
     
     def perform_destroy(self, instance):
