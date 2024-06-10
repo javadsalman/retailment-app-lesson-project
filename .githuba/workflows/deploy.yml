@@ -1,0 +1,33 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up SSH and deploy to server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd /home/${{secrets.SSH_USERNAME}}/lesson_project/retailment-app-lesson-project
+            git pull origin master
+            source /home/${{secrets.SSH_USERNAME}}/lesson_project/projectenv/bin/activate
+            pip install -r requirements.txt
+            python3 manage.py migrate
+            python3 manage.py collectstatic --noinput
+            sudo systemctl restart gunicorn
