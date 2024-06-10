@@ -3,11 +3,11 @@ name: Deploy
 on:
   push:
     branches:
-      - master
+      - main
 
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
   deploy:
@@ -24,9 +24,9 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd /home/${{secrets.SSH_USERNAME}}/lesson_project/retailment-app-lesson-project
-            git pull origin master
-            source /home/${{secrets.SSH_USERNAME}}/lesson_project/projectenv/bin/activate
+            cd /home/${{secrets.SSH_USERNAME}}/myprojectdir
+            git pull origin main
+            source /home/${{secrets.SSH_USERNAME}}/myprojectdir/myprojectenv/bin/activate
             pip install -r requirements.txt
             python3 manage.py migrate
             python3 manage.py collectstatic --noinput
